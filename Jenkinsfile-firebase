@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         FIREBASE_TOKEN = credentials('firebase-token')
-        FIREBASE_PROJECT = 'my-portfolio-69c72'  /* Your Firebase project ID */
+        FIREBASE_PROJECT = 'my-portfolio-69c72'  
     }
     
     stages {
