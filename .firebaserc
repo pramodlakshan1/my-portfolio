@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "my-portfolio-69c72"
+  },
+  "targets": {
+    "my-portfolio-69c72": {
+      "hosting": {
+        "main": [
+          "pramod-lakshan"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

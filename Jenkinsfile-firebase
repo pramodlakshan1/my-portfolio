@@ -1,0 +1,84 @@
+pipeline {
+    agent any
+    
+    environment {
+        FIREBASE_TOKEN = credentials('firebase-token')
+        FIREBASE_PROJECT = 'my-portfolio-69c72'  /* Your Firebase project ID */
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo '📦 Pulling latest code from GitHub...'
+                checkout scm
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                echo '📦 Installing npm dependencies...'
+                sh 'npm install'
+            }
+        }
+        
+        stage('Build React App') {
+            steps {
+                echo '🔨 Building React application...'
+                sh 'npm run build'
+            }
+        }
+        
+        stage('Deploy to Firebase') {
+            steps {
+                echo '🔥 Deploying to Firebase Hosting...'
+                sh """
+                    # Verify firebase-tools is available
+                    firebase --version
+                    
+                    # Deploy to Firebase
+                    firebase deploy \
+                        --token ${FIREBASE_TOKEN} \
+                        --project ${FIREBASE_PROJECT} \
+                        --only hosting \
+                        --non-interactive
+                """
+            }
+        }
+        
+        stage('Verify Deployment') {
+            steps {
+                echo '🔍 Verifying Firebase deployment...'
+                script {
+                    def firebaseUrl = "https://${FIREBASE_PROJECT}.web.app"
+                    sh """
+                        echo "Firebase URL: ${firebaseUrl}"
+                        curl -s -o /dev/null -w "HTTP Status: %{http_code}\\n" ${firebaseUrl} || true
+                    """
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo """
+            ========================================
+            🎉 DEPLOYMENT SUCCESSFUL! 🎉
+            
+            Firebase URL: https://${FIREBASE_PROJECT}.web.app
+            Build Number: ${BUILD_NUMBER}
+            ========================================
+            """
+        }
+        failure {
+            echo """
+            ========================================
+            ❌ DEPLOYMENT FAILED! ❌
+            
+            Build Number: ${BUILD_NUMBER}
+            Check console output for details.
+            ========================================
+            """
+        }
+    }
+}
