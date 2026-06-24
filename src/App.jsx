@@ -4,10 +4,12 @@ import Hero from './Components/Hero'
 import Projects from './components/Projects';
 import Products from './components/Products';
 import Experience from './components/Experience';
-// import SkillsCertificates from './components/SkillsCertificates';
-// import Services from './components/Services';
-// import Contact from './components/Contact';
-// import Footer from './components/Footer';
+import SkillAndCertificate from './Components/SkillsCertificate';
+import Services from './Components/Service';
+import Blogs from './Components/Blogs';
+import Contact from './Components/Contact';
+import Footer from './Components/Footer';
+
 
 function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -36,10 +38,11 @@ function App() {
       <Projects />
       <Products />
       <Experience /> 
-      {/* <SkillsCertificates />
+      <SkillAndCertificate />
       <Services />
+      <Blogs />
       <Contact />
-      <Footer />  */}
+      <Footer />  
     </div>
   );
 }

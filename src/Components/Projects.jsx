@@ -2,83 +2,154 @@ import React, { useRef } from 'react';
 
 const Projects = () => {
   const scrollRef = useRef(null);
-  
+
   const projects = [
-    { title: 'NEO BANK', category: 'Fintech', color: 'from-cyan-500 to-blue-500', year: '2024' },
-    { title: 'ORBIT SPACE', category: 'SaaS', color: 'from-purple-500 to-pink-500', year: '2023' },
-    { title: 'ECHO STUDIO', category: 'Creative', color: 'from-orange-500 to-red-500', year: '2024' },
-    { title: 'QUANTUM LAB', category: 'AI/ML', color: 'from-green-500 to-emerald-500', year: '2023' },
+    {
+      title: 'NEO BANK',
+      category: 'Fintech Platform',
+      year: '2024',
+      description: 'A next-generation digital banking experience engineered with high-throughput microservices and real-time ledger accounting.',
+      technologies: ['React', 'Node.js', 'Spring Boot', 'MongoDB'],
+      accentColor: 'border-cyan-500/30 hover:border-cyan-400 group-hover/card:shadow-cyan-500/10',
+      tagStyle: 'text-cyan-400 bg-cyan-500/10'
+    },
+    {
+      title: 'ORBIT SPACE',
+      category: 'SaaS Workspace',
+      year: '2023',
+      description: 'A cloud-native intuitive team workspace combining document collaboration, custom kanban streams, and metrics reporting dashboards.',
+      technologies: ['Next.js', 'Tailwind CSS', 'AWS S3', 'Socket.io'],
+      accentColor: 'border-purple-500/30 hover:border-purple-400 group-hover/card:shadow-purple-500/10',
+      tagStyle: 'text-purple-400 bg-purple-500/10'
+    },
+    {
+      title: 'ECHO STUDIO',
+      category: 'Creative Hub',
+      year: '2024',
+      description: 'An AI-powered automated translation and video audio sync engine providing real-time lip-synchronization profiling.',
+      technologies: ['React', 'Python', 'FastAPI', 'Llama 3'],
+      accentColor: 'border-orange-500/30 hover:border-orange-400 group-hover/card:shadow-orange-500/10',
+      tagStyle: 'text-orange-400 bg-orange-500/10'
+    },
+    {
+      title: 'QUANTUM LAB',
+      category: 'AI/ML Suite',
+      year: '2023',
+      description: 'Predictive statistical analytics application providing deep neural network abstractions for data pipelines.',
+      technologies: ['TypeScript', 'Node.js', 'Docker', 'TensorFlow'],
+      accentColor: 'border-emerald-500/30 hover:border-emerald-400 group-hover/card:shadow-emerald-500/10',
+      tagStyle: 'text-emerald-400 bg-emerald-500/10'
+    },
   ];
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -400 : 400;
+      // Calculates dynamic width to scroll based on viewports cleanly
+      const width = scrollRef.current.clientWidth;
+      const scrollAmount = direction === 'left' ? -width * 0.75 : width * 0.75;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="projects" className="py-24 px-6 relative">
+    <section id="projects" className="py-24 px-4 sm:px-6 bg-black text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Featured
-            <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"> Work</span>
-          </h2>
-          <div className="w-24 h-1 bg-linear-to-r from-cyan-500 to-purple-500" />
-        </div>
         
-        {/* Horizontal scroll container */}
-        <div className="relative group">
-          <button 
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/80 backdrop-blur p-3 rounded-full hidden group-hover:flex transition-all"
-          >
-            ←
-          </button>
-          
+        {/* Header Layout with Navigation Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+          <div>
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+              Featured
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"> Work</span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full" />
+          </div>
+
+          {/* Clean Engineering Navigation Buttons */}
+          <div className="flex gap-3">
+            <button 
+              onClick={() => scroll('left')}
+              className="p-3 rounded-xl border border-gray-800 bg-gray-950/50 hover:bg-gray-900 text-gray-400 hover:text-white transition-all active:scale-95"
+              aria-label="Scroll Left"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="p-3 rounded-xl border border-gray-800 bg-gray-950/50 hover:bg-gray-900 text-gray-400 hover:text-white transition-all active:scale-95"
+              aria-label="Scroll Right"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Dynamic Horizontal Scroll Wrapper */}
+        <div className="relative">
           <div 
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-8"
-            style={{ scrollbarWidth: 'none' }}
+            className="flex gap-6 overflow-x-auto scroll-smooth pb-8 snap-x snap-mandatory no-scrollbar"
+            style={{ 
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
           >
             {projects.map((project, idx) => (
               <div 
                 key={idx}
-                className="shrink-0 w-[90vw] md:w-[70vw] lg:w-[50vw] group/project cursor-pointer"
+                className="shrink-0 w-[88vw] sm:w-[60vw] lg:w-[38vw] snap-start group/card"
               >
-                <div className={`bg-linear-to-br ${project.color} p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1`}>
-                  <div className="flex justify-between items-start mb-8">
-                    <span className="text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur">
-                      {project.year}
-                    </span>
-                    <span className="text-4xl opacity-50 group-hover/project:opacity-100 transition">
-                      →
-                    </span>
-                  </div>
-                  <h3 className="text-3xl md:text-5xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-lg opacity-80">{project.category}</p>
+                {/* Clean Glassmorphism/Dark Card Design */}
+                <div className={`h-full flex flex-col justify-between bg-gradient-to-b from-gray-900/60 to-gray-950/90 border rounded-3xl p-6 md:p-8 transition-all duration-500 group-hover/card:shadow-[0_10px_30px_rgba(0,0,0,0.3)] ${project.accentColor}`}>
                   
-                  <div className="mt-8 flex gap-4">
-                    <button className="px-4 py-2 bg-white/20 rounded-full hover:bg-white/30 transition">
-                      Live Demo
-                    </button>
-                    <button className="px-4 py-2 bg-black/30 rounded-full hover:bg-black/50 transition">
-                      Case Study
-                    </button>
+                  <div>
+                    {/* Header: Category & Year */}
+                    <div className="flex justify-between items-center mb-6">
+                      <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${project.tagStyle}`}>
+                        {project.category}
+                      </span>
+                      <span className="text-sm font-mono text-gray-500">{project.year}</span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 text-white group-hover/card:text-transparent group-hover/card:bg-clip-text group-hover/card:bg-gradient-to-r group-hover/card:from-white group-hover/card:to-gray-400 transition-all duration-300">
+                      {project.title}
+                    </h3>
+
+                    {/* Project Introduction */}
+                    <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-normal line-clamp-3">
+                      {project.description}
+                    </p>
                   </div>
+
+                  {/* Tech Badges & Interactive Learn More CTA */}
+                  <div>
+                    {/* Render Used Technologies Dynamic Loop */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.technologies.map((tech, techIdx) => (
+                        <span key={techIdx} className="text-xs bg-gray-900 border border-gray-800 text-gray-400 px-2.5 py-1 rounded-md font-mono">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Core CTA Action Row */}
+                    <div className="pt-4 border-t border-gray-950 flex items-center justify-between">
+                      <button className="flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white group/btn transition-colors">
+                        Learn More 
+                        <span className="transform transition-transform duration-300 group-hover/btn:translate-x-1 text-base">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             ))}
           </div>
-          
-          <button 
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/80 backdrop-blur p-3 rounded-full hidden group-hover:flex transition-all"
-          >
-            →
-          </button>
         </div>
+
       </div>
     </section>
   );
