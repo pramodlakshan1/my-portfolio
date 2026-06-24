@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar'
 import Hero from './Components/Hero'
-import Projects from './components/Projects';
-import Products from './components/Products';
-import Experience from './components/Experience';
+import Projects from './Components/Projects';
+import Products from './Components/Products';
+import Experience from './Components/Experience';
 import SkillAndCertificate from './Components/SkillsCertificate';
 import Services from './Components/Service';
 import Blogs from './Components/Blogs';
