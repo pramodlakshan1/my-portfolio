@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router'; // Correct hook for functional navigation
 
 const Projects = () => {
   const scrollRef = useRef(null);
+  const navigate = useNavigate(); // Initialize the navigation router hook
 
   const projects = [
     {
+      id: 'neo-bank', // Slug matched to dynamic parameter routing
       title: 'NEO BANK',
       category: 'Fintech Platform',
       year: '2024',
@@ -14,6 +17,7 @@ const Projects = () => {
       tagStyle: 'text-cyan-400 bg-cyan-500/10'
     },
     {
+      id: 'orbit-space',
       title: 'ORBIT SPACE',
       category: 'SaaS Workspace',
       year: '2023',
@@ -23,6 +27,7 @@ const Projects = () => {
       tagStyle: 'text-purple-400 bg-purple-500/10'
     },
     {
+      id: 'echo-studio',
       title: 'ECHO STUDIO',
       category: 'Creative Hub',
       year: '2024',
@@ -32,6 +37,7 @@ const Projects = () => {
       tagStyle: 'text-orange-400 bg-orange-500/10'
     },
     {
+      id: 'quantum-lab',
       title: 'QUANTUM LAB',
       category: 'AI/ML Suite',
       year: '2023',
@@ -44,7 +50,6 @@ const Projects = () => {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      // Calculates dynamic width to scroll based on viewports cleanly
       const width = scrollRef.current.clientWidth;
       const scrollAmount = direction === 'left' ? -width * 0.75 : width * 0.75;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
@@ -65,7 +70,7 @@ const Projects = () => {
             <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full" />
           </div>
 
-          {/* Clean Engineering Navigation Buttons */}
+          {/* Controls */}
           <div className="flex gap-3">
             <button 
               onClick={() => scroll('left')}
@@ -99,11 +104,10 @@ const Projects = () => {
                 key={idx}
                 className="shrink-0 w-[88vw] sm:w-[60vw] lg:w-[38vw] snap-start group/card"
               >
-                {/* Clean Glassmorphism/Dark Card Design */}
                 <div className={`h-full flex flex-col justify-between bg-gradient-to-b from-gray-900/60 to-gray-950/90 border rounded-3xl p-6 md:p-8 transition-all duration-500 group-hover/card:shadow-[0_10px_30px_rgba(0,0,0,0.3)] ${project.accentColor}`}>
                   
                   <div>
-                    {/* Header: Category & Year */}
+                    {/* Category & Year */}
                     <div className="flex justify-between items-center mb-6">
                       <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${project.tagStyle}`}>
                         {project.category}
@@ -124,7 +128,6 @@ const Projects = () => {
 
                   {/* Tech Badges & Interactive Learn More CTA */}
                   <div>
-                    {/* Render Used Technologies Dynamic Loop */}
                     <div className="flex flex-wrap gap-2 mb-8">
                       {project.technologies.map((tech, techIdx) => (
                         <span key={techIdx} className="text-xs bg-gray-900 border border-gray-800 text-gray-400 px-2.5 py-1 rounded-md font-mono">
@@ -133,10 +136,13 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    {/* Core CTA Action Row */}
-                    <div className="pt-4 border-t border-gray-950 flex items-center justify-between">
-                      <button className="flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white group/btn transition-colors">
-                        Learn More 
+                    {/* Fixed Core CTA Action Row */}
+                    <div className="pt-4 border-t border-gray-900 flex items-center justify-between">
+                      <button 
+                        onClick={() => navigate(`/project/${project.id}`)} 
+                        className="flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white group/btn transition-colors"
+                      >
+                        <span>Learn More</span> 
                         <span className="transform transition-transform duration-300 group-hover/btn:translate-x-1 text-base">
                           →
                         </span>

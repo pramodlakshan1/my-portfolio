@@ -5,7 +5,7 @@ const Hero = () => {
     'Software Engineer', 
     'Web Developer', 
     'Mobile App Developer', 
-    'Motivational Speaker'
+    'Fullstack developer'
   ], []);
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -44,7 +44,7 @@ const Hero = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black text-white px-4 sm:px-6 selection:bg-cyan-500/30">
       
       {/* High-Performance Ambient Background (No layout repaints) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gray-900/40 via-black to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-gray-900/40 via-black to-black pointer-events-none" />
       
       {/* Structural Interactive Layout Container */}
       <div className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center">
@@ -71,7 +71,7 @@ const Hero = () => {
 
         {/* Monospaced, Zero-Shift Text Area */}
         <div className="text-lg sm:text-2xl text-gray-300 mb-10 min-h-[40px] flex items-center justify-center font-medium">
-          <span>👋 I'm Pramod Lakshan, a&nbsp;</span>
+          <span>👋 I'm Pramod Lakshan, &nbsp;</span>
           <span className="text-cyan-400 font-mono border-r-2 border-cyan-400 animate-[pulse_1s_infinite] pr-1">
             {displayedText}
           </span>
@@ -92,7 +92,7 @@ const Hero = () => {
           </button>
           
           <button 
-            onClick={() => window.location.href = 'mailto:your-email@domain.com'} 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} 
             className="px-8 py-3.5 border border-gray-800 bg-gray-950/40 backdrop-blur-md text-gray-300 hover:text-white rounded-full hover:bg-gray-900 hover:border-gray-700 transition-all active:scale-[0.98]"
           >
             Let's talk 💬

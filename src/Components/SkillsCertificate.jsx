@@ -1,6 +1,9 @@
 import React from 'react';
 
-// Production-ready dataset completely isolated from view logic
+import AWSLogo from '../assets/Amazon_Web_Services-Logo.wine.svg';
+import GENAILogo from '../assets/GenaiLogo.png'; 
+
+// Isolated Data Architecture
 const SKILL_CATEGORIES = [
   {
     id: 'cat-1',
@@ -26,7 +29,7 @@ const CERTIFICATES = [
   {
     id: 'cert-1',
     title: 'BSc (Hons) in Computing',
-    issuer: 'ESOFT Metro Campus',
+    issuer: 'ESOFT Metro Campus / Kingston University',
     date: '2025',
     verificationUrl: '#', 
     badgeColor: 'text-cyan-400 bg-cyan-500/10'
@@ -41,16 +44,42 @@ const CERTIFICATES = [
   }
 ];
 
+// Production UX Architecture: Rendered with Local Image Assets
+const CLOUD_BADGES = [
+  {
+    id: 'badge-gcp-1',
+    title: 'Google Cloud Computing Foundations: Cloud Computing Fundamentals',
+    issuer: 'Google Cloud',
+    status: 'Verified',
+    verificationUrl: 'https://www.skills.google/public_profiles/d0e47ad3-5d4e-47b3-84c6-e2835f368a4c/badges/24647258',
+    logo: GENAILogo,
+    alt: 'Google Cloud Logo',
+    badgeStyle: 'border-blue-500/20 bg-blue-500/5 hover:border-blue-500/40',
+    statusStyle: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+  },
+  {
+    id: 'badge-aws-1',
+    title: 'AWS Cloud Explorer / Foundations',
+    issuer: 'Amazon Web Services',
+    status: 'In Progress',
+    verificationUrl: '#',
+    logo: AWSLogo,
+    alt: 'AWS Logo',
+    badgeStyle: 'border-amber-500/20 bg-amber-500/5 hover:border-amber-500/40',
+    statusStyle: 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+  }
+];
+
 const SkillAndCertificate = () => {
   return (
     <section id="skills" className="py-24 px-4 sm:px-6 bg-black text-white relative overflow-hidden">
-      {/* Background Graphic Ambient Accent */}
+      {/* Structural Ambient Lights */}
       <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute left-0 top-1/2 w-[400px] h-[400px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Section Header */}
+        {/* Section Header Layout */}
         <div className="mb-20">
           <span className="text-xs font-mono tracking-[0.2em] text-gray-500 uppercase mb-3 block">
             Capabilities & Credentials
@@ -62,10 +91,10 @@ const SkillAndCertificate = () => {
           <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full mt-4" />
         </div>
 
-        {/* Master Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Master Content Split Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-20">
           
-          {/* LEFT SIDE: Skills Ecosystem (Takes 7 columns on desktop) */}
+          {/* LEFT COLUMN: Skill Ecosystem (7 Cols) */}
           <div className="lg:col-span-7 space-y-8">
             <h3 className="text-xl font-mono text-gray-400 tracking-wider uppercase mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" />
@@ -76,13 +105,12 @@ const SkillAndCertificate = () => {
               {SKILL_CATEGORIES.map((category) => (
                 <div 
                   key={category.id}
-                  className={`bg-gradient-to-br ${category.accent.split(' ')[0]} ${category.accent.split(' ')[1]} border ${category.accent.split(' ')[3]} rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.01]`}
+                  className="bg-gradient-to-br from-gray-900/30 to-gray-950/40 border border-gray-900 rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.01]"
                 >
                   <h4 className={`text-lg font-bold mb-4 ${category.accent.split(' ')[2]}`}>
                     {category.title}
                   </h4>
                   
-                  {/* Skill Badge Pill Cloud */}
                   <div className="flex flex-wrap gap-2.5">
                     {category.skills.map((skill, index) => (
                       <span 
@@ -98,7 +126,7 @@ const SkillAndCertificate = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Certifications Timeline (Takes 5 columns on desktop) */}
+          {/* RIGHT COLUMN: Institutional Credentials (5 Cols) */}
           <div className="lg:col-span-5 space-y-8">
             <h3 className="text-xl font-mono text-gray-400 tracking-wider uppercase mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
@@ -109,12 +137,12 @@ const SkillAndCertificate = () => {
               {CERTIFICATES.map((cert) => (
                 <div 
                   key={cert.id}
-                  className="group/cert relative bg-gradient-to-b from-gray-900/50 to-gray-950/80 border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-gray-700 shadow-xl"
+                  className="group/cert relative bg-gradient-to-b from-gray-900/40 to-gray-950/60 border border-gray-900 rounded-2xl p-6 transition-all duration-300 hover:border-gray-700 shadow-xl"
                 >
                   <div className="flex justify-between items-start gap-4 mb-4">
                     <div>
                       <span className={`inline-block text-[10px] font-mono uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-full ${cert.badgeColor}`}>
-                        Verified
+                        Academic
                       </span>
                       <h4 className="text-lg font-bold tracking-tight text-white/90 group-hover/cert:text-white mt-2 transition-colors">
                         {cert.title}
@@ -128,7 +156,6 @@ const SkillAndCertificate = () => {
                     </span>
                   </div>
 
-                  {/* Clean verification CTA anchor */}
                   <div className="pt-4 border-t border-gray-900/60 flex justify-end">
                     <a 
                       href={cert.verificationUrl}
@@ -136,17 +163,72 @@ const SkillAndCertificate = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-white transition-colors group/link"
                     >
-                      View Credential 
-                      <span className="transform transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
-                        ↗
-                      </span>
+                      View Credential <span className="transform transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
                     </a>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+          
+        </div>
 
+        {/* BOTTOM SECTION: Compact Cloud Specializations Grid */}
+        <div className="pt-12 border-t border-gray-900 space-y-6">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-xl font-mono text-gray-400 tracking-wider uppercase flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+              Cloud Specializations
+            </h3>
+            <p className="text-xs text-gray-500 font-mono pl-3.5">Continuous Professional Development</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CLOUD_BADGES.map((badge) => (
+              <div 
+                key={badge.id}
+                className={`group/badge flex flex-col justify-between border rounded-2xl p-5 max-w-sm w-full transition-all duration-300 backdrop-blur-sm ${badge.badgeStyle}`}
+              >
+                {/* 1. Entire Logo Container Area */}
+                <div className="w-full bg-black/60 rounded-xl border border-gray-900/60 p-4 mb-4 relative overflow-hidden flex items-center justify-center min-h-[100px] group-hover/badge:border-gray-800 transition-colors">
+                  <img 
+                    src={badge.logo} 
+                    alt={badge.alt} 
+                    className="max-h-40 w-auto object-contain z-10 transition-transform duration-300 group-hover/badge:scale-105" 
+                  />
+                  <span className={`absolute top-2 right-2 text-[9px] font-mono border uppercase tracking-wider px-2 py-0.5 rounded-md ${badge.statusStyle}`}>
+                    {badge.status}
+                  </span>
+                </div>
+
+                {/* 2. Title of the Credential */}
+                <div className="mb-5">
+                  <span className="text-[11px] font-mono text-gray-500 block mb-1">
+                    {badge.issuer}
+                  </span>
+                  <h4 className="text-sm font-bold text-white/90 group-hover/badge:text-white tracking-tight line-clamp-2">
+                    {badge.title}
+                  </h4>
+                </div>
+
+                {/* 3. Link or Button to view credential */}
+                <div className="pt-3 border-t border-gray-900/60 flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-gray-600">
+                    {badge.id.split('-')[1].toUpperCase()}
+                  </span>
+                  <a 
+                    href={badge.verificationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-400 group-hover/badge:text-white transition-colors group/link"
+                  >
+                    View Credential 
+                    <span className="transform transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 text-gray-600 group-hover/badge:text-white">↗</span>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
