@@ -36,7 +36,7 @@ function HomePage() {
       <Navbar />
       <Hero />
       <Projects />
-      <Products />
+      {/* <Products /> */}
       <Experience /> 
       <SkillAndCertificate />
       <Services />

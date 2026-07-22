@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import ThemeButton from './ThemeButton';
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'Home', icon: '🏠' },
   { id: 'projects', label: 'Work', icon: '⚡' },
-  { id: 'products', label: 'Products', icon: '🛒' },
+  // { id: 'products', label: 'Products', icon: '🛒' },
   { id: 'experience', label: 'Journey', icon: '📅' },
   { id: 'skills', label: 'Skills', icon: '🎯' },
   { id: 'services', label: 'Services', icon: '✨' },
-  { id: 'blogs', label: 'Articles', icon: '📝' }, // Added target mapping missing anchor
+  { id: 'blogs', label: 'Articles', icon: '📝' },
   { id: 'contact', label: 'Connect', icon: '💬' }
 ];
 
@@ -28,7 +29,7 @@ const Navbar = () => {
             setActive(item.id);
           }
         },
-        { rootMargin: '-40% 0px -40% 0px' } // Highly accurate center-viewport tracking trigger
+        { rootMargin: '-40% 0px -40% 0px' }
       );
 
       observer.observe(element);
@@ -44,6 +45,16 @@ const Navbar = () => {
     setActive(id);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    // NOTE: In Vite/React development, files in the 'public' directory are served from the root path '/'
+    link.href = '/Pramod_Lakshan.pdf'; 
+    link.download = 'Pramod_Lakshan.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   return (
     <>
@@ -63,7 +74,6 @@ const Navbar = () => {
                 >
                   <span className="text-lg">{item.icon}</span>
                   
-                  {/* Absolute positioning of text label cleanly fixes layout shifting */}
                   <span className="text-xs font-semibold tracking-wide font-mono hidden group-hover:inline-block transition-opacity duration-300">
                     {item.label}
                   </span>
@@ -99,14 +109,14 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Action CTA Anchor Header Control */}
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+        {/* The Global Theme Button Switcher */}
         <button 
-          onClick={() => alert('CV asset route connection triggered')}
-          className="bg-white text-black text-xs font-mono font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xl hover:bg-gray-100 active:scale-95 transition-all flex items-center gap-2 border border-gray-200"
+          onClick={handleResumeDownload}
+          className="bg-white text-black text-xs font-mono font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-xl hover:bg-gray-100 active:scale-95 transition-all flex items-center gap-2 border border-gray-200 dark:bg-zinc-900 dark:text-white dark:border-zinc-800 dark:hover:bg-zinc-800"
         >
           <span>Get Resume</span>
-          <span className="text-gray-400">→</span>
+          <span className="text-gray-400 dark:text-zinc-500">→</span>
         </button>
       </div>
     </>
