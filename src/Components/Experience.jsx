@@ -3,21 +3,21 @@ import React from 'react';
 const TIMELINE_DATA = [
   { 
     id: 'exp-1',
-    year: '2022-2024', 
-    role: 'Lead Designer', 
-    company: 'Creative Studio',
+    year: '2021-2024', 
+    role: 'Store Assistant', 
+    company: 'Flintec Tranceduserces',
     variant: 'cyan'
   },
   { 
     id: 'exp-2',
-    year: '2020-2022', 
-    role: 'Frontend Dev', 
-    company: 'Tech Corp',
+    year: '2025-2026', 
+    role: 'Intern Software Engineer', 
+    company: 'Gamage Requruters ',
     variant: 'purple'
   },
   { 
     id: 'exp-3',
-    year: '2018-2020', 
+    year: '2026-Present', 
     role: 'Freelancer', 
     company: 'Self-employed',
     variant: 'orange'

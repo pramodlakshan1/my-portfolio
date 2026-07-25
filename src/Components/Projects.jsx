@@ -7,12 +7,12 @@ const Projects = () => {
 
   const projects = [
     {
-      id: 'neo-bank', // Slug matched to dynamic parameter routing
-      title: 'NEO BANK',
-      category: 'Fintech Platform',
-      year: '2024',
+      id: 'q-flow', // Slug matched to dynamic parameter routing
+      title: 'Q-FLOW',
+      category: 'Quality Management System',
+      year: '2025',
       description: 'A next-generation digital banking experience engineered with high-throughput microservices and real-time ledger accounting.',
-      technologies: ['React', 'Node.js', 'Spring Boot', 'MongoDB'],
+      technologies: ['React', 'Spring Boot', 'PostgreSQL', ],
       accentColor: 'border-cyan-500/30 hover:border-cyan-400 group-hover/card:shadow-cyan-500/10',
       tagStyle: 'text-cyan-400 bg-cyan-500/10'
     },
